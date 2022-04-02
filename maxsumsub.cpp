@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-
+/*
 void gen_subarray(int *arr,int n)
 {
  int msum=0;
@@ -29,10 +29,22 @@ void gen_subarray(int *arr,int n)
     }
     cout<<"maximum sum is "<<msum<<endl;
 
-}
+}*/
+//method 2
 int main()
 {
     int arr[5]={3,7,4,8,5};
-    gen_subarray(arr,5);
+    int sum=0;
+    int msum=0;
+    for(int i=0;i<5;i++)
+    {
+        sum=sum+arr[i];
+        if(sum<0)
+        {
+            sum=0;
+        }
+        msum=max(sum,msum);
+    }
+    cout<<msum;
 }
 
