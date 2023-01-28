@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string longestCommonSubstring(string X, string Y, int m, int n, int lastMatch) {
+    if (m == 0 || n == 0) {
+        return "";
+    }
+    if (X[m-1] == Y[n-1] && (lastMatch == -1 || m == lastMatch)) {
+        return longestCommonSubstring(X, Y, m-1, n-1, m-1) + X[m-1];
+    }
+    else {
+        string s1 = longestCommonSubstring(X, Y, m-1, n, lastMatch);
+        string s2 = longestCommonSubstring(X, Y, m, n-1, lastMatch);
+        return (s1.length() > s2.length()) ? s1 : s2;
+    }
+}
+string LCS(string s1, string s2, int m, int n) {
+    if (m == 0 || n == 0) {
+        return "";
+    }
+    if (s1[m-1] == s2[n-1]) {
+        return LCS(s1, s2, m-1, n-1) + s1[m-1];
+    }
+    else {
+        string lcs1 = LCS(s1, s2, m-1, n);
+        string lcs2 = LCS(s1, s2, m, n-1);
+        return (lcs1.length() > lcs2.length()) ? lcs1 : lcs2;
+    }
+int main() {
+    string X = "ABCDGH";
+    string Y = "ACDGHR";
+    int m = X.length();
+    int n = Y.length();
+    int lastMatch = -1;
+    cout << "Longest common substring: " << longestCommonSubstring(X, Y, m, n, lastMatch) << endl;
+    return 0;
+}
