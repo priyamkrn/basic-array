@@ -1,0 +1,48 @@
+void  solve(vector<int> &num, int x,int index,int &ans,int count)
+{
+    if(x<0)
+    {
+        return;
+    }
+    if(x==0)
+        {
+            ans = min(ans,count);
+            return;
+        }
+    
+    if( index>=num.size())
+    {
+        if(x==0)
+        {
+            ans = min(ans,count);
+            
+        }
+        return ;
+    }
+   
+    // pick 
+   solve(num,x-num[index],index,ans,count+1) ;
+    
+    // not pick
+   solve(num,x,index+1,ans,count);
+    
+   
+}
+
+int minimumElements(vector<int> &num, int x)
+{
+    // Write your code here.
+     int index=0;
+    int ans=INT_MAX;
+    int count=0;
+    solve(num,x,index,ans,count);
+   // cout<< ans;
+    if(ans==INT_MAX)
+       {
+         return -1;
+           
+       }
+    else{
+        return ans;
+    }
+}
