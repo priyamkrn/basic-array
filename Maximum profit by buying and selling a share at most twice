@@ -1,3 +1,4 @@
+https://www.youtube.com/watch?v=Y_VI2zyca7Y&ab_channel=AyushiSharma
 int maxProfit(int price[], int n)
 {
 	int* profit = new int[n];
