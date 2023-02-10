@@ -1,0 +1,28 @@
+#include <iostream>
+#include <deque>
+
+int main() {
+  int window_size = 3;  // maximum size of the window
+  std::deque<int> window;  // deque to store the elements of the window
+
+  // sample input stream
+  int stream[] = {1, 2, 3, 4, 5, 6};
+  int n = sizeof(stream) / sizeof(stream[0]);
+
+  // processing the stream
+  for (int i = 0; i < n; i++) {
+    while (!window.empty() && stream[i] <= window.back()) {
+      window.pop_back();
+    }
+    window.push_back(stream[i]);
+    if (i >= window_size - 1) {
+      std::cout << window.front() << " ";
+      if (window.front() == stream[i - (window_size - 1)]) {
+        window.pop_front();
+      }
+    }
+  }
+  std::cout << std::endl;
+
+  return 0;
+}
