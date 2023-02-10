@@ -1,0 +1,38 @@
+#include <iostream>
+#include <deque>
+
+int main() {
+  int k = 7;  // target sum
+  std::deque<int> window;  // deque to store the elements of the window
+  int sum = 0;  // current sum of the elements in the window
+
+  // sample input stream
+  int stream[] = {2, 3, 1, 4, 5, 6, 1};
+  int n = sizeof(stream) / sizeof(stream[0]);
+
+  int start = 0, end = 0;  // start and end indices of the subarray
+  int max_len = 0;  // length of the largest subarray of sum k
+
+  // processing the stream
+  for (int i = 0; i < n; i++) {
+    sum += stream[i];
+    window.push_back(stream[i]);
+    while (sum > k) {
+      sum -= window.front();
+      window.pop_front();
+    }
+    if (sum == k && window.size() > max_len) {
+      max_len = window.size();
+      start = i - window.size() + 1;
+      end = i;
+    }
+  }
+
+  // printing the largest subarray of sum k
+  for (int i = start; i <= end; i++) {
+    std::cout << stream[i] << " ";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}
