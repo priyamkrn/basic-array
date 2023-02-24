@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int lps(string s, int i, int j) {
+    if(i == j) {
+        return 1; // base case: a single character is always a palindrome
+    }
+    if(s[i] == s[j] && i+1 == j) {
+        return 2; // base case: two same characters are always a palindrome
+    }
+    if(s[i] == s[j]) {
+        return lps(s, i+1, j-1) + 2; // if the first and last characters match
+    }
+    else {
+        return max(lps(s, i, j-1), lps(s, i+1, j)); // if the first and last characters do not match
+    }
+}
+
+int main() {
+    string s = "abcbda";
+    int n = s.size();
+    cout << "Length of Longest Palindromic Subsequence: " << lps(s, 0, n-1) << endl;
+    return 0;
+}
